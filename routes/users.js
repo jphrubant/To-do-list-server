@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user-model");
 
 /* GET USER */
-router.get('/user', function(req, res, next) {
+router.get('/', function(req, res, next) {
   User.findById(req.session.currentUser._id)
     .populate('todos')
     .then((currentUser) => {
@@ -17,15 +17,21 @@ router.get('/user', function(req, res, next) {
 });
 
 /* UPDATE USER */
-router.put('/', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
   const { username, password } = req.body;
+  const {id} = req.params;
 
-  User.findByIdAndUpdate(username, password)
-    .then((currentUser) => {
+  User.findByIdAndUpdate(id, {username, password}, {new: true})
+    .then(() => {
       res
         .status(200)
-        .json(currentUser);
+        .json({message: `The user IDed ${id} was updated successfully`}); 
     })
+    .catch(err => {
+      res
+      .status(501)
+      .json(err);
+    });
 });
 
 /* CREATE USER */
@@ -52,7 +58,7 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-/* UPDATE USER */
+/* LOGIN USER */
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
