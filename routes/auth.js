@@ -8,12 +8,10 @@ const saltRounds = 10;
 /* GET USER */
 router.get('/', function(req, res, next) {
   const id = req.session.currentUser._id
-  console.log('GET USER ID', id)
   User.findById(id)
-    .populate('todos')
+    .populate('todo')
     .then((currentUser) => {
-      // currentUser.password = "";
-      console.log("currentUser", currentUser)
+      currentUser.password = "";
       res
         .status(200)
         .json(currentUser);
@@ -52,7 +50,6 @@ router.post('/signup', async (req, res, next) => {
       const newUser = await User.create({username, password: hashPass});
       newUser.password = "";
       req.session.currentUser = newUser;
-      console.log('NewUSER', newUser)
       res 
         .status(201)
         .json(newUser);
@@ -66,10 +63,8 @@ router.post('/signup', async (req, res, next) => {
 /* LOGIN USER */
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
-  
   try{
     const user = await User.findOne({username});
-    console.log('USERRRRR', user)
     if (!user) {
       next(createError(404));
     }
@@ -91,7 +86,6 @@ router.post('/login', async (req, res, next) => {
 
 /* LOGOUT USER */
 router.post('/logout', (req, res, next) => {
-  console.log('req.session', req.session)
   req.session.destroy();
   res
     .status(204)

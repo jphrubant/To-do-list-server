@@ -5,7 +5,7 @@ const User = require("../models/user-model");
 
 // GET ONE TODO BY ID 
 router.get('/:id', (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   Todo
     .findById(id)
     .then(oneTodo => {
@@ -22,7 +22,8 @@ router.get('/:id', (req, res, next) => {
 
 // CREATE A TODO
 router.post('/', (req, res, next) => {
-  const { name, description, user} = req.body;
+  const { name, description} = req.body;
+  const id = req.session.currentUser._id
   Todo  
     .create({name, description})
     .then(newTodo => {
@@ -30,8 +31,8 @@ router.post('/', (req, res, next) => {
         .status(201)
         .json(newTodo);
         User.findByIdAndUpdate(
-          user,
-          { $push: {todos: newTodo._id}},
+          id,
+          { $push: {todo: newTodo._id}},
           { new : true }
         )
         .then(response => {
