@@ -22,7 +22,7 @@ router.get('/:id', (req, res, next) => {
 
 // CREATE A TODO
 router.post('/', (req, res, next) => {
-  const { name, description, user } = req.body;
+  const { name, description, user} = req.body;
   Todo  
     .create({name, description})
     .then(newTodo => {

@@ -7,15 +7,16 @@ const saltRounds = 10;
 
 /* GET USER */
 router.get('/', function(req, res, next) {
-  req.session.currentUser = user;
-  console.log("USEEEEEEEEEER", user)
+  const id = req.session.currentUser._id
+  console.log('GET USER ID', id)
   User.findById(id)
     .populate('todos')
     .then((currentUser) => {
-      currentUser.password = "";
+      // currentUser.password = "";
+      console.log("currentUser", currentUser)
       res
         .status(200)
-        .json(currentUSer);
+        .json(currentUser);
     })
 });
 
@@ -40,7 +41,6 @@ router.get('/', function(req, res, next) {
 /* CREATE USER */
 router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body;
-  console.log(username, password, req.body)
   try {
     const usernameExists = await User.findOne({ username }, 'username');
     
@@ -69,13 +69,13 @@ router.post('/login', async (req, res, next) => {
   
   try{
     const user = await User.findOne({username});
+    console.log('USERRRRR', user)
     if (!user) {
       next(createError(404));
     }
     else if (bcrypt.compareSync(password, user.password)) {
       user.password= "";
       req.session.currentUser = user;
-      console.log('USEEEEEER', user)
       res
         .status(200)
         .json(user)
