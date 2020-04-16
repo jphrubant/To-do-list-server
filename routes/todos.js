@@ -3,7 +3,7 @@ const router = express.Router();
 const Todo = require("../models/todo-model");
 const User = require("../models/user-model");
 
-// GET ONE TODO BY ID //
+// GET ONE TODO BY ID 
 router.get('/:id', (req, res, next) => {
   const { id } = req.params
   Todo
@@ -66,7 +66,7 @@ router.put('/:id', (req, res, next) => {
     });  
 });
 
-// DELETE A REPORT //
+// DELETE A TODO
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
     Todo

@@ -11,7 +11,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const todosRouter = require('./routes/todos');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 // MONGOOSE CONNECTION
 mongoose
@@ -62,7 +62,7 @@ app.use(cors({
 
 // ROUTER MIDDLEWARE
 app.use('/todos', todosRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
