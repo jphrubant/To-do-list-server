@@ -55,10 +55,10 @@ router.put('/:id', (req, res, next) => {
   const { name, description } = req.body;
   Todo
     .findByIdAndUpdate(id, {name, description})
-    .then(() => {
+    .then(updatedTodo => {
       res
         .status(200)
-        .json({message: `The TODO IDed ${id} was updated successfully`});
+        .json(updatedTodo);
     })
     .catch(err => {
       res
