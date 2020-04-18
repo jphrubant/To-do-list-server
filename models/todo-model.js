@@ -3,8 +3,10 @@ const Schema = mongoose.Schema;
 
 const todoSchema = new Schema({
     name: {type: String, required: true},
-    description: {type: String, requiered: true},
-    solved: { type: Boolean, default: false, requiered: true},
+    description: {type: String, required: true},
+    solved: { type: Boolean, default: false},
+    // createdTimestamp: {type: String},
+    // solvedTimestamp: {type: String},
     user: [{type: Schema.Types.ObjectId, ref:'User'}]
 }, {
     timestamps: {
