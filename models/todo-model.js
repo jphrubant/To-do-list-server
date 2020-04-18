@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const todoSchema = new Schema({
     name: {type: String, required: true},
     description: {type: String, requiered: true},
+    solved: { type: Boolean, default: false, requiered: true},
     user: [{type: Schema.Types.ObjectId, ref:'User'}]
 }, {
     timestamps: {

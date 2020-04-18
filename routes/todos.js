@@ -72,10 +72,10 @@ router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
     Todo
       .findByIdAndRemove(id)
-      .then(() => {
+      .then((data) => {
         res
           .status(202)
-          .json({message: `TODO IDed ${id} removed successfully`});
+          .json(data);
         })
         .catch(err => {
           res

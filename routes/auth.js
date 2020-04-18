@@ -18,24 +18,6 @@ router.get('/', function(req, res, next) {
     })
 });
 
-/* UPDATE USER */
-// router.put('/:id', function(req, res, next) {
-//   const { username, password } = req.body;
-//   const {id} = req.params;
-
-//   User.findByIdAndUpdate(id, {username, password}, {new: true})
-//     .then(() => {
-//       res
-//         .status(200)
-//         .json({message: `The user IDed ${id} was updated successfully`}); 
-//     })
-//     .catch(err => {
-//       res
-//       .status(501)
-//       .json(err);
-//     });
-// });
-
 /* CREATE USER */
 router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body;
@@ -93,3 +75,21 @@ router.post('/logout', (req, res, next) => {
 });
 
 module.exports = router;
+
+/* UPDATE USER */
+// router.put('/:id', function(req, res, next) {
+//   const { username, password } = req.body;
+//   const {id} = req.params;
+
+//   User.findByIdAndUpdate(id, {username, password}, {new: true})
+//     .then(() => {
+//       res
+//         .status(200)
+//         .json({message: `The user IDed ${id} was updated successfully`}); 
+//     })
+//     .catch(err => {
+//       res
+//       .status(501)
+//       .json(err);
+//     });
+// });
