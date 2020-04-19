@@ -5,8 +5,8 @@ const todoSchema = new Schema({
     name: {type: String, required: true},
     description: {type: String, required: true},
     solved: { type: Boolean, default: false},
-    // createdTimestamp: {type: String},
-    // solvedTimestamp: {type: String},
+    createdTimestamp: {type: String},
+    solvedTimestamp: {type: String},
     user: [{type: Schema.Types.ObjectId, ref:'User'}]
 }, {
     timestamps: {

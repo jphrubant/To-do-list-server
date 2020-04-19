@@ -22,10 +22,10 @@ router.get('/:id', (req, res, next) => {
 
 // CREATE A TODO
 router.post('/', (req, res, next) => {
-  const { name, description} = req.body;
+  const { name, description, createdTimestamp} = req.body;
   const id = req.session.currentUser._id
   Todo  
-    .create({name, description})
+    .create({name, description, createdTimestamp})
     .then(newTodo => {
       res
         .status(201)
@@ -52,9 +52,9 @@ router.post('/', (req, res, next) => {
 // UPDATE A TODO
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
-  const { name, description, solved } = req.body;
+  const { name, description, solved, solvedTimestamp } = req.body;
   Todo
-    .findByIdAndUpdate(id, {name, description, solved})
+    .findByIdAndUpdate(id, {name, description, solved, solvedTimestamp})
     .then(updatedTodo => {
       res
         .status(200)
