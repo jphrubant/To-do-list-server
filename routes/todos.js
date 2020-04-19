@@ -52,9 +52,9 @@ router.post('/', (req, res, next) => {
 // UPDATE A TODO
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
-  const { name, description } = req.body;
+  const { name, description, solved } = req.body;
   Todo
-    .findByIdAndUpdate(id, {name, description})
+    .findByIdAndUpdate(id, {name, description, solved})
     .then(updatedTodo => {
       res
         .status(200)
