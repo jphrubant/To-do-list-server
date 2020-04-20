@@ -27,6 +27,15 @@ mongoose
 // EXPRESS SERVER INSTANCE
 const app = express();
 
+// CORS MIDDLEWARE SETUP
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.PUBLIC_DOMAIN, 
+            "https://mern-to-do-list.herokuapp.com/"
+    ]
+  }),
+);
 // SESSION MIDDLEWARE
 app.use(
   session({
@@ -54,16 +63,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// CORS MIDDLEWARE SETUP
-app.use(
-  cors({
-    credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN, 
-            "https://mern-to-do-list.herokuapp.com/"
-    ]
-  }),
-);
 
 // ROUTER MIDDLEWARE
 app.use('/todos', todosRouter);
