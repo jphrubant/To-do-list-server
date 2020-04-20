@@ -55,10 +55,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cors({
-  credentials: true,
-  origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
-}));
+// CORS MIDDLEWARE SETUP
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.PUBLIC_DOMAIN, 
+            "https://mern-to-do-list.herokuapp.com/"
+    ]
+  }),
+);
 
 // ROUTER MIDDLEWARE
 app.use('/todos', todosRouter);
