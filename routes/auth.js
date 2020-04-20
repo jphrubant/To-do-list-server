@@ -47,6 +47,7 @@ router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
   try{
     const user = await User.findOne({username});
+
     if (!user) {
       next(createError(404));
     }
