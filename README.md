@@ -4,7 +4,7 @@
 ## Description:
 This is a simple 'TO DO' web application built using React and Context API.
 
-## Server/Backend
+## Client/Frontend
 
 ### User Stories:
 ```
